@@ -46,6 +46,8 @@ class HackRF(object):
     # HTime API new attributes
     _divisor: int = 200e6
     _divisor_one_pps: int = 0
+    _trig_delay: int = 20e6
+
     @staticmethod
     def enumerate() -> list[str]:
         """
@@ -568,6 +570,20 @@ class HackRF(object):
         self._check_error(libhackrf.hackrf_time_set_divisor_one_pps(
             self._device_pointer,value))
         self._divisor_one_pps = value
+
+
+    @property
+    def trig_delay(self) -> int:
+        """ Get sampling trigger delay """
+        return self._trig_delay
+
+    @trig_delay.setter
+    def trig_delay(self, value: int) -> None:
+        """ Set sampling trigger delay """
+        self._check_error(libhackrf.hackrf_time_set_trig_delay_next_pps(
+            self._device_pointer,value))
+        self._trig_delay = value
+
 
 
 

@@ -201,4 +201,7 @@ libhackrf.hackrf_time_set_divisor_one_pps.restype = c_int
 libhackrf.hackrf_time_set_divisor_one_pps.argtypes = [p_hackrf_device,
     c_uint32]
 
+libhackrf.hackrf_time_set_trig_delay_next_pps.restype = c_int
+libhackrf.hackrf_time_set_trig_delay_next_pps.argtypes = [p_hackrf_device,
+    c_uint32]
 
