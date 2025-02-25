@@ -49,6 +49,7 @@ class HackRF(object):
     _trig_delay: int = 20e6
     _secs = c_int64(0)
     _seconds_next_pps: int = 0
+    _ticks = c_uint32(0)
 
     @staticmethod
     def enumerate() -> list[str]:
@@ -612,6 +613,20 @@ class HackRF(object):
         self._check_error(libhackrf.hackrf_time_set_seconds_next_pps(
             self._device_pointer,value))
         self._seconds_next_pps = value
+
+
+    @property
+    def ticks(self) -> int:
+        """ Get ticks """
+        self._check_error(libhackrf.hackrf_time_get_ticks_now(
+            self._device_pointer,pointer(self._ticks)))
+        return self._ticks.value
+
+    @ticks.setter
+    def ticks(self, value: int) -> None:
+        """ Set ticks """
+        self._check_error(libhackrf.hackrf_time_set_ticks_now(
+            self._device_pointer,value))
 
 
 
