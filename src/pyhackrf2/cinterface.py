@@ -178,4 +178,7 @@ if libhackrf.hackrf_init() != 0:
 libhackrf.hackrf_reset.restype = c_int
 libhackrf.hackrf_reset.argtypes = [p_hackrf_device]
 
+libhackrf.hackrf_board_id_read.restype = c_int
+libhackrf.hackrf_board_id_read.argtypes = [p_hackrf_device,
+    POINTER(c_uint8)]
 

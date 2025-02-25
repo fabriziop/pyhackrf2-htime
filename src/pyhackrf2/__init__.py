@@ -38,6 +38,8 @@ class HackRF(object):
     # data collected in rx mode
     buffer: bytearray()
 
+    # HTime API completion existing attrinutes
+    _board_id = c_uint8(0)
     @staticmethod
     def enumerate() -> list[str]:
         """
@@ -504,6 +506,14 @@ class HackRF(object):
         self._check_error(libhackrf.hackrf_reset(self._device_pointer))
         tm.sleep(5)
         self.close()
+
+
+    def get_board_id(self) -> int:
+        """ Get board id FP20240705"""
+        self._check_error(libhackrf.hackrf_board_id_read(
+            self._device_pointer,pointer(self._board_id)))
+        return self._board_id.value
+
 
 
 
