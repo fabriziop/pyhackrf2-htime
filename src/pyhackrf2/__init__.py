@@ -51,6 +51,8 @@ class HackRF(object):
     _seconds_next_pps: int = 0
     _ticks = c_uint32(0)
     _clk_freq: float = 10e6
+    _mcu_clk_sync: bool = False
+
 
     @staticmethod
     def enumerate() -> list[str]:
@@ -402,7 +404,7 @@ class HackRF(object):
         """
         Get current low noise amplifier gain.
         """
-        return self.lna_gain
+        return self._lna_gain
 
     @lna_gain.setter
     def lna_gain(self, value: int) -> None:
@@ -652,8 +654,16 @@ class HackRF(object):
         self._clk_freq = freq
 
 
+    @property
+    def mcu_clk_sync(self) -> bool:
+        """ Get enabled/disabled status of mcu clock synchronization """
+        return self._mcu_clk_sync
 
+    @mcu_clk_sync.setter
+    def mcu_clk_sync(self, enable: bool) -> None:
+        """ Set status of mcu clock synchronization """
+        self._check_error(libhackrf.hackrf_time_set_mcu_clk_sync(
+            self._device_pointer,1 if enable else 0))
+        self._mcu_clk_sync = enable
 
-
-
-
+#### END

@@ -229,3 +229,8 @@ libhackrf.hackrf_time_set_clk_freq.restype = c_int
 libhackrf.hackrf_time_set_clk_freq.argtypes = [p_hackrf_device,
     c_double]
 
+libhackrf.hackrf_time_set_mcu_clk_sync.restype = c_int
+libhackrf.hackrf_time_set_mcu_clk_sync.argtypes = [p_hackrf_device,
+    c_bool]
+
+#### END
