@@ -41,6 +41,8 @@ class HackRF(object):
     # HTime API completion existing attrinutes
     _board_id = c_uint8(0)
     _clkin_status = c_uint8(0)
+    _hw_sync_mode: bool = False
+
     @staticmethod
     def enumerate() -> list[str]:
         """
@@ -522,6 +524,20 @@ class HackRF(object):
         self._check_error(libhackrf.hackrf_get_clkin_status(
             self._device_pointer,pointer(self._clkin_status)))
         return self._clkin_status.value
+
+
+    @property
+    def hw_sync_mode(self) -> bool:
+        """ Get hardware sync mode """
+        return self._hw_sync_mode
+
+    @hw_sync_mode.setter
+    def hw_sync_mode(self, enable: bool) -> None:
+        """ Set hardware sync mode """
+        self._check_error(libhackrf.hackrf_set_hw_sync_mode(
+            self._device_pointer,1 if enable else 0))
+        self._hw_sync_mode = enable
+
 
 
 

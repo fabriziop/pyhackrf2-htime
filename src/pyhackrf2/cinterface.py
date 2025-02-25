@@ -186,3 +186,7 @@ libhackrf.hackrf_get_clkin_status.restype = c_int
 libhackrf.hackrf_get_clkin_status.argtypes = [p_hackrf_device,
     POINTER(c_uint8)]
 
+libhackrf.hackrf_set_hw_sync_mode.restype = c_int
+libhackrf.hackrf_set_hw_sync_mode.argtypes = [p_hackrf_device,
+    c_uint8]
+
