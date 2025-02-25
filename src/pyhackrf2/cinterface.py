@@ -205,3 +205,15 @@ libhackrf.hackrf_time_set_trig_delay_next_pps.restype = c_int
 libhackrf.hackrf_time_set_trig_delay_next_pps.argtypes = [p_hackrf_device,
     c_uint32]
 
+libhackrf.hackrf_time_get_seconds_now.restype = c_int
+libhackrf.hackrf_time_get_seconds_now.argtypes = [p_hackrf_device,
+    POINTER(c_int64)]
+
+libhackrf.hackrf_time_set_seconds_now.restype = c_int
+libhackrf.hackrf_time_set_seconds_now.argtypes = [p_hackrf_device,
+    c_int64]
+
+libhackrf.hackrf_time_set_seconds_next_pps.restype = c_int
+libhackrf.hackrf_time_set_seconds_next_pps.argtypes = [p_hackrf_device,
+    c_int64]
+

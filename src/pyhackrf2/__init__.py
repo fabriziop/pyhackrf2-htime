@@ -47,6 +47,8 @@ class HackRF(object):
     _divisor: int = 200e6
     _divisor_one_pps: int = 0
     _trig_delay: int = 20e6
+    _secs = c_int64(0)
+    _seconds_next_pps: int = 0
 
     @staticmethod
     def enumerate() -> list[str]:
@@ -583,6 +585,33 @@ class HackRF(object):
         self._check_error(libhackrf.hackrf_time_set_trig_delay_next_pps(
             self._device_pointer,value))
         self._trig_delay = value
+
+
+    @property
+    def seconds(self) -> int:
+        """ Get seconds """
+        self._check_error(libhackrf.hackrf_time_get_seconds_now(
+            self._device_pointer,pointer(self._secs)))
+        return self._secs.value
+
+    @seconds.setter
+    def seconds(self, value: int) -> None:
+        """ Set seconds """
+        self._check_error(libhackrf.hackrf_time_set_seconds_now(
+            self._device_pointer,value))
+
+
+    @property
+    def seconds_next_pps(self) -> int:
+        """ Get seconds next pps """
+        return self._seconds_next_pps
+
+    @seconds_next_pps.setter
+    def seconds_next_pps(self, value: int) -> None:
+        """ Set seconds next pss """
+        self._check_error(libhackrf.hackrf_time_set_seconds_next_pps(
+            self._device_pointer,value))
+        self._seconds_next_pps = value
 
 
 
