@@ -50,6 +50,7 @@ class HackRF(object):
     _secs = c_int64(0)
     _seconds_next_pps: int = 0
     _ticks = c_uint32(0)
+    _clk_freq: float = 10e6
 
     @staticmethod
     def enumerate() -> list[str]:
@@ -627,6 +628,28 @@ class HackRF(object):
         """ Set ticks """
         self._check_error(libhackrf.hackrf_time_set_ticks_now(
             self._device_pointer,value))
+
+
+    @property
+    def clk_freq(self) -> float:
+        """
+        Get current main clock frequency in Hertz
+        """
+        return self._clk_freq
+
+    @clk_freq.setter
+    def clk_freq(self, freq: float) -> None:
+        """
+        Set main clock frequency in Hertz. HackRF automatically sets baseband
+        filter to 0.75 x sampling rate, rounded down
+        to one of valid values. The filter value is computed in this setter.
+        """
+        self._check_error(libhackrf.hackrf_time_set_clk_freq(self._device_pointer,           freq))
+        self._filter_bandwidth = min(
+            BASEBAND_FILTER_VALID_VALUES,
+            key=lambda x: abs(x - 0.75 * freq) if x - 0.75 * freq < 0 else 1e8,
+        )
+        self._clk_freq = freq
 
 
 

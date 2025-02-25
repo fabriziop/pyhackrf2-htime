@@ -225,3 +225,7 @@ libhackrf.hackrf_time_set_ticks_now.restype = c_int
 libhackrf.hackrf_time_set_ticks_now.argtypes = [p_hackrf_device,
     c_uint32]
 
+libhackrf.hackrf_time_set_clk_freq.restype = c_int
+libhackrf.hackrf_time_set_clk_freq.argtypes = [p_hackrf_device,
+    c_double]
+
