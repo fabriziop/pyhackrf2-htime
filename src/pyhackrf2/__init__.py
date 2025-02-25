@@ -43,6 +43,9 @@ class HackRF(object):
     _clkin_status = c_uint8(0)
     _hw_sync_mode: bool = False
 
+    # HTime API new attributes
+    _divisor: int = 200e6
+    _divisor_one_pps: int = 0
     @staticmethod
     def enumerate() -> list[str]:
         """
@@ -537,6 +540,34 @@ class HackRF(object):
         self._check_error(libhackrf.hackrf_set_hw_sync_mode(
             self._device_pointer,1 if enable else 0))
         self._hw_sync_mode = enable
+
+
+    #### HTime, API new properties
+
+    @property
+    def divisor(self) -> int:
+        """ Get PPS timer divisor """
+        return self._divisor
+
+    @divisor.setter
+    def divisor(self, value: int) -> None:
+        """ Set PPS timer divisor """
+        self._check_error(libhackrf.hackrf_time_set_divisor_next_pps(
+            self._device_pointer,value))
+        self._divisor = value
+
+
+    @property
+    def divisor_one_pps(self) -> int:
+        """ Get one PPS timer divisor """
+        return self._divisor_one_pps
+
+    @divisor_one_pps.setter
+    def divisor_one_pps(self, value: int) -> None:
+        """ Set one PPS timer divisor """
+        self._check_error(libhackrf.hackrf_time_set_divisor_one_pps(
+            self._device_pointer,value))
+        self._divisor_one_pps = value
 
 
 
