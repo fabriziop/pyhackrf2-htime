@@ -182,3 +182,7 @@ libhackrf.hackrf_board_id_read.restype = c_int
 libhackrf.hackrf_board_id_read.argtypes = [p_hackrf_device,
     POINTER(c_uint8)]
 
+libhackrf.hackrf_get_clkin_status.restype = c_int
+libhackrf.hackrf_get_clkin_status.argtypes = [p_hackrf_device,
+    POINTER(c_uint8)]
+

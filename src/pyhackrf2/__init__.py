@@ -40,6 +40,7 @@ class HackRF(object):
 
     # HTime API completion existing attrinutes
     _board_id = c_uint8(0)
+    _clkin_status = c_uint8(0)
     @staticmethod
     def enumerate() -> list[str]:
         """
@@ -513,6 +514,15 @@ class HackRF(object):
         self._check_error(libhackrf.hackrf_board_id_read(
             self._device_pointer,pointer(self._board_id)))
         return self._board_id.value
+
+
+    @property
+    def clkin_status(self) -> int:
+        """ Get clockin status FP20230913"""
+        self._check_error(libhackrf.hackrf_get_clkin_status(
+            self._device_pointer,pointer(self._clkin_status)))
+        return self._clkin_status.value
+
 
 
 
