@@ -176,6 +176,7 @@ class HackRF(object):
         """
         Synchrous function to read predefined number of samples into buffer and return them as numpy array
         """
+
         # prevent running forever
         if not num_samples:
             return np.array([])
@@ -490,3 +491,19 @@ class HackRF(object):
             libhackrf.hackrf_board_partid_serialno_read(self._device_pointer, sn)
         )
         return "".join([f"{sn.serial_no[i]:08x}" for i in range(4)])
+
+
+    #### HTime, API completion of existing functions
+
+    def reset(self):
+        """
+        Reset device
+        """
+        if not self._device_opened:
+            return
+        self._check_error(libhackrf.hackrf_reset(self._device_pointer))
+        tm.sleep(5)
+        self.close()
+
+
+
