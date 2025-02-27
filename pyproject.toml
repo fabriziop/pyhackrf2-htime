@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 name = "pyhackrf2_htime"
 version = "1.0.3"
 description = "Python bindings for libhackrf rewritten plus HTime extension"
-readme = "README.md"
+readme = "Readme.md"
 requires-python = ">=3"
 classifiers = [
     "Topic :: Communications :: Ham Radio",
