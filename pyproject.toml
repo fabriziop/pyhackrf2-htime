@@ -2,9 +2,9 @@
 requires = ["setuptools>=70.0", "numpy>=1.24.3"]
 build-backend = "setuptools.build_meta"
 [project]
-name = "pyhackrf2"
+name = "pyhackrf2_htime"
 version = "1.0.3"
-description = "Python bindings for libhackrf rewritten"
+description = "Python bindings for libhackrf rewritten plus HTime extension"
 readme = "README.md"
 requires-python = ">=3"
 classifiers = [
