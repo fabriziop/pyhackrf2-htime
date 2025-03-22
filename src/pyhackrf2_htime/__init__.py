@@ -234,7 +234,7 @@ class HackRF(object):
         values = np.array(self.buffer).astype(np.int8)
         iq = values.astype(np.float64).view(np.complex128)
         iq /= 127.5
-        iq -= 1 + 1j
+        #iq -= 1 + 1j
         return iq
 
     def _sweep_callback(self, hackrf_transfer: lib_hackrf_transfer) -> int:
