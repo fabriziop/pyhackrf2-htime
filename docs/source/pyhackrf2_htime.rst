@@ -68,7 +68,7 @@ packages at system level. A python virtual environment is needed.
 
 .. code::
 
-  pip install dist/pyhackrf2_htime-1.0.3.tar.gz
+  pip install dist/pyhackrf2_htime-0.1.1.tar.gz
 
 
 Examples
