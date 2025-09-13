@@ -480,6 +480,7 @@ class HackRF(object):
         self._check_error(
             libhackrf.hackrf_set_amp_enable(self._device_pointer, 1 if enable else 0)
         )
+        self._amplifier_on = enable
 
     @property
     def bias_tee_on(self) -> bool:
