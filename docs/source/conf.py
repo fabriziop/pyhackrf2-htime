@@ -15,8 +15,8 @@ project = 'Pyhackrf2 HTime'
 copyright = '2025, Fabrizio Pollastri'
 author = 'Fabrizio Pollastri <mxgbot@gmail.com>'
 
-version = '0.1.1'
-release = '0.1.1'
+version = '0.1.2'
+release = '0.1.2'
 
 
 # -- General configuration ---------------------------------------------------
